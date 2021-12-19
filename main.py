@@ -9,6 +9,8 @@ from scipy import sparse
 import pickle
 from gensim import models
 import nltk
+import nltk
+nltk.data.path.append('nltk_data/')
 from nltk.stem import WordNetLemmatizer, SnowballStemmer
 
 app = Flask(__name__)
@@ -57,15 +59,15 @@ def getPrediction(testData):
 
 @app.route('/predict', methods=['POST'])
 def predict_from_model():
-    np.random.seed(2018)
-    nltk.download('wordnet')
+    # np.random.seed(2018)
+    # nltk.download('wordnet')
     in_text = request.get_json()['text']
 
     return jsonify(getPrediction(in_text).tolist())
 
 @app.errorhandler(500)
 def server_error(e):
-    logging.exception('An error occurred during a request.')
+    # logging.exception('An error occurred during a request.')
     return """
     An internal error occurred: <pre>{}</pre>
     See logs for full stacktrace.
@@ -75,3 +77,4 @@ if __name__ == '__main__':
     # This is used when running locally. Gunicorn is used to run the
     # application on Google App Engine. See entrypoint in app.yaml.
     app.run(host='127.0.0.1', port=8080, debug=True)
+
