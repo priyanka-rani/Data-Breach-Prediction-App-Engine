@@ -59,8 +59,8 @@ def getPrediction(testData):
 
 @app.route('/predict', methods=['POST'])
 def predict_from_model():
-    # np.random.seed(2018)
-    # nltk.download('wordnet')
+    #np.random.seed(2018)
+    #nltk.download('wordnet')
     in_text = request.get_json()['text']
 
     return jsonify(getPrediction(in_text).tolist())
